@@ -59,6 +59,35 @@ Nuxt.js 会依据 pages 目录中的所有 *.vue 文件生成应用的路由配�
 pages 目录中需要新建 users 目录 新建文件 _id.vue
 
 ```
+中间件:  
+中间件允许您定义一个自定义函数运行在一个页面或一组页面渲染之前。  
+每一个中间件应放置在 middleware/ 目录。文件名的名称将成为中间件名称  
+中间件可以异步执行,只需要返回一个 Promise 或使用第2个 callback 作为第一个参数：
+如：
+```
+middleware/stats.js
+
+import axios from 'axios'
+
+export default function ({ route }) {
+  return axios.post('http://my-stats-api.com', {
+    url: route.fullPath
+  })
+}
+然后在你的 nuxt.config.js 、 layouts 或者 pages 中使用中间件:
+
+nuxt.config.js
+
+module.exports = {
+  router: {
+    middleware: 'stats'
+  }  
+}
+stats 中间件将在每个路由改变时被调用。
+
+中间件demo：https://github.com/nuxt/example-auth0
+
+```
 
 ## 安装使用插件
 
