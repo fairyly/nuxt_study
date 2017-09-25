@@ -1,5 +1,7 @@
 # 学习文档
 
+* [nuxt 教程](https://zh.nuxtjs.org/guide)
+
 SSR: 服务端渲染（Server Side Render）
 
 ## 使用模板
@@ -30,6 +32,16 @@ export default {
 看 pages 的目录结构，Nuxt.js 自动生成的路由配置；
 
 在 Nuxt.js 里面定义带参数的动态路由，需要创建对应的以 *下划线* 作为前缀的 Vue 文件 或 目录
+```
+<ul class="users">
+  <li v-for="user in users">
+    <nuxt-link :to="'/users/'+user.id">{{ user.name }}</nuxt-link>
+  </li>
+</ul>
+
+pages 目录中需要新建 users 目录 新建文件 _id.vue
+
+```
 
 ## 安装使用插件
 
@@ -59,4 +71,17 @@ import Vue from 'vue'
 import Element from 'element-ui'
 Vue.use(Element)
 
+```
+
+## 异步数据
+
+asyncData 方法
+
+```
+export default {
+  async asyncData () {
+    const { data } = await axios.get('https://jsonplaceholder.typicode.com/users')
+    return { users: data }
+  }
+}
 ```
