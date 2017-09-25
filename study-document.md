@@ -1,5 +1,19 @@
 # 学习文档
 
+```
+npm install --save nuxt
+
+vue init nuxt-community/starter-template <project-name>
+
+cd <project-name>
+
+npm install
+
+npm run dev
+
+http://localhost:3000
+```
+
 * [nuxt 教程](https://zh.nuxtjs.org/guide)
 
 SSR: 服务端渲染（Server Side Render）
@@ -27,7 +41,10 @@ export default {
 
 ## 路由
 
+页面使用：  
 <nuxt-link to="/">Back home</nuxt-link>
+
+Nuxt.js 会依据 pages 目录中的所有 *.vue 文件生成应用的路由配置。
 
 看 pages 的目录结构，Nuxt.js 自动生成的路由配置；
 
