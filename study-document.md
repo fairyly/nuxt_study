@@ -102,3 +102,30 @@ export default {
   }
 }
 ```
+
+## 状态树
+
+根目录新建 store 目录，新建文件 index.js
+```
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+const store = () => new Vuex.Store({
+
+  state: {
+    counter: 0
+  },
+  mutations: {
+    increment (state) {
+      state.counter++
+    }
+  }
+})
+
+export default store
+
+组件中使用
+<button @click="$store.commit('increment')">{{ $store.state.counter }}</button>
+```
