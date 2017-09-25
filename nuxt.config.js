@@ -16,12 +16,12 @@ module.exports = {
   css: [
     'element-ui/lib/theme-default/index.css'
   ],
-  babel: {
+ /* babel: {
     plugins: [['component', [{
       libraryName: 'element-ui',
       styleLibraryName: 'theme-default'
     }]]]
-  },
+  },*/
   /*
   ** Customize the progress bar color
   */

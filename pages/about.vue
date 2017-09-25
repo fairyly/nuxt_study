@@ -2,7 +2,7 @@
 <template>
   <div class="container">
    <logo/>
-    <h2>Users</h2>
+    <h2>Users {{ name }}</h2>
     <ul class="users">
       <li v-for="user in users">
         <nuxt-link :to="'/users/'+user.id">{{ user.name }}</nuxt-link>
@@ -16,13 +16,17 @@ import Logo from '~/components/Logo.vue'
 import axios from 'axios'
 
 export default {
-  async asyncData () {
+  async asyncData ({ req }) {
     const { data } = await axios.get('https://jsonplaceholder.typicode.com/users')
-    return { users: data }
+    return {
+      users: data,
+      name: req ? 'server' : 'client'
+    }
   },
   components: {
     Logo
-  }
+  },
+  transition: 'bounce'
 }
 </script>
 

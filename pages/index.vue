@@ -5,16 +5,19 @@
       <h1 class="title">
         nuxtdemo
       </h1>
+      <button @click="$store.commit('increment')">{{ $store.state.counter }}</button>
+      <img src="~assets/addshow.jpg" alt="">
       <el-button>默认按钮</el-button>
       <el-switch
         v-model="value1"
         on-text=""
         off-text="">
       </el-switch>
-      <nuxt-link to="/about">About page</nuxt-link>
+      <nuxt-link to="/users/">About page</nuxt-link>
       <h2 class="subtitle">
         test
       </h2>
+      <nuxt-child :key="$route.params.id"/>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
         <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
@@ -29,6 +32,7 @@ import 'element-ui/lib/theme-default/index.css'
 import Logo from '~/components/Logo.vue'
 
 export default {
+  // layout: 'blog',
   components: {
     Logo
   },
