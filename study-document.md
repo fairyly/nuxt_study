@@ -1,5 +1,7 @@
 # 学习文档
 
+eslint中默认是以两个空格缩进，如果多个空格会报错；
+
 ```
 npm install --save nuxt
 
