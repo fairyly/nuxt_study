@@ -107,6 +107,8 @@ export default {
 
 根目录新建 store 目录，新建文件 index.js
 ```
+普通方式：
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -128,4 +130,71 @@ export default store
 
 组件中使用
 <button @click="$store.commit('increment')">{{ $store.state.counter }}</button>
+
+模块方式：
+new Vuex.Store({
+  state: { counter: 0 },
+  mutations: {
+    increment (state) {
+      state.counter++
+    }
+  },
+  modules: {
+    todos: {
+      state: {
+        list: []
+      },
+      mutations: {
+        add (state, { text }) {
+          state.list.push({
+            text,
+            done: false
+          })
+        },
+        remove (state, { todo }) {
+          state.list.splice(state.list.indexOf(todo), 1)
+        },
+        toggle (state, { todo }) {
+          todo.done = !todo.done
+        }
+      }
+    }
+  }
+})
+
+组件中使用
+<template>
+  <ul>
+    <li v-for="todo in todos">
+      <input type="checkbox" :checked="todo.done" @change="toggle(todo)">
+      <span :class="{ done: todo.done }">{{ todo.text }}</span>
+    </li>
+    <li><input placeholder="What needs to be done?" @keyup.enter="addTodo"></li>
+  </ul>
+</template>
+
+<script>
+import { mapMutations } from 'vuex'
+
+export default {
+  computed: {
+    todos () { return this.$store.state.todos.list }
+  },
+  methods: {
+    addTodo (e) {
+      this.$store.commit('todos/add', e.target.value)
+      e.target.value = ''
+    },
+    ...mapMutations({
+      toggle: 'todos/toggle'
+    })
+  }
+}
+</script>
+
+<style>
+.done {
+  text-decoration: line-through;
+}
+</style>
 ```
