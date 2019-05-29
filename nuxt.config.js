@@ -1,40 +1,68 @@
-module.exports = {
+import pkg from './package'
+
+export default {
+  mode: 'spa',
+
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    title: 'nuxtdemo',
+    title: pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'test' }
+      { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    /* 移动端适配 */
+    script: [
+      { innerHTML: require('./assets/js/flexible_nuxt'), type: 'text/javascript', charset: 'utf-8'}
+    ],
+    // 不对<script>标签中内容做转义处理
+    __dangerouslyDisableSanitizers: ['script']
   },
-  css: [
-    'element-ui/lib/theme-default/index.css'
+
+  /*
+   ** Customize the progress-bar color
+   */
+  loading: { color: '#fff' },
+
+  /*
+   ** Global CSS
+   */
+  css: ['ant-design-vue/dist/antd.css'],
+
+  /*
+   ** Plugins to load before mounting the App
+   */
+  plugins: ['@/plugins/antd-ui', '~/plugins/axios'],
+
+  /*
+   ** Nuxt.js modules
+   */
+  modules: [
+    // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa'
   ],
- /* babel: {
-    plugins: [['component', [{
-      libraryName: 'element-ui',
-      styleLibraryName: 'theme-default'
-    }]]]
-  },*/
   /*
-  ** Customize the progress bar color
-  */
-  loading: { color: '#3B8070' },
+   ** Axios module configuration
+   */
+  axios: {
+    baseURL: 'https://cnodejs.org/api/v1'
+    // See https://github.com/nuxt-community/axios-module#options
+  },
+
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** Run ESLint on save
-    */
-    extend (config, ctx) {
-      if (ctx.dev && ctx.isClient) {
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -43,11 +71,12 @@ module.exports = {
         })
       }
     },
-    vender:[
-      'element-ui','axios'
+    // 移动端适配
+    postcss:[
+      require("postcss-px2rem")({
+        remUnit: 75
+      })
     ],
-  },
-  plugins: [
-    { src: '~plugins/element-ui.js',ssr: true}
-  ],
+    vendor: ['axios'] // 为防止重复打包
+  }
 }

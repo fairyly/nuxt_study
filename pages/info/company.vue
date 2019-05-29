@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        vue
+        info
       </h1>
       <h2 class="subtitle">
         My stylish Nuxt.js project
@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style>
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -41,25 +41,27 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  .title {
-    font-family: 'Quicksand', 'Source Sans Pro', '-apple-system',
-      'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial',
-      'sans-serif';
-    display: block;
-    font-weight: 300;
-    font-size: 100px;
-    color: #35495e;
-    letter-spacing: 1px;
-  }
-  .subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-  }
-  .links {
-    padding-top: 15px;
-  }
+}
+
+.title {
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+.links {
+  padding-top: 15px;
 }
 </style>
