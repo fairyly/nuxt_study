@@ -1,35 +1,39 @@
 <template>
   <section class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        vue
-      </h1>
-      <h2 class="subtitle">
-        My stylish Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-          >GitHub</a
-        >
-      </div>
+      <header class="index-header">
+        <div class="inner-content index-inner">
+          <div class="logo-content fl">
+            <a href="/" class="header-index-logo" title="node"></a>
+          </div>
+          <div class="index-nav fl">
+            <ul>
+              <li class="cur">
+                <a ka="header-home" href="/">首页</a>
+              </li>
+              <li class="">
+                <a ka="header-job" href="/good">精华</a>
+              </li>
+              <li class="">
+                <a ka="header_brand" href="/share">分享</a>
+              </li>
+              <li class="">
+                <a ka="header-app" href="/ask">问答</a>
+              </li>
+              <li class="">
+                <a ka="header-article" href="/job">招聘</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="index-ads"></div>
     </div>
   </section>
 </template>
-
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
-  }
+  components: {}
 }
 </script>
 
@@ -37,9 +41,6 @@ export default {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   .title {
     font-family: 'Quicksand', 'Source Sans Pro', '-apple-system',
@@ -51,15 +52,50 @@ export default {
     color: #35495e;
     letter-spacing: 1px;
   }
-  .subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-  }
-  .links {
-    padding-top: 15px;
+  .index-header {
+    position: relative;
+    width: 100%;
+    height: 49px;
+    background: #202329;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+    z-index: 1005;
+    &::after {
+      content: '';
+      display: block;
+      overflow: hidden;
+      visibility: hidden;
+      clear: both;
+    }
+
+    .index-inner {
+      max-width: 1000px;
+      padding: 0 15px;
+
+      .logo-content {
+        a {
+          display: block;
+          width: 120px;
+          height: 35px;
+          background: url(https://static2.cnodejs.org/public/images/cnodejs_light.svg)
+            3px 7px no-repeat;
+          background-size: 120px 25px;
+        }
+      }
+      .index-nav {
+        font-size: 0;
+        margin-left: 15px;
+        height: 49px;
+        line-height: 49px;
+
+        li {
+          display: inline-block;
+          vertical-align: top;
+          text-align: center;
+          font-size: 14px;
+          margin: 0 7px;
+        }
+      }
+    }
   }
 }
 </style>
