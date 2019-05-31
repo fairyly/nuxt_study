@@ -25,6 +25,8 @@ h6 {
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: none;
+  font-family: arial,verdana,helvetica,'PingFang SC','HanHei SC',STHeitiSC-Light,Microsoft Yahei,sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -259,6 +261,7 @@ li, ol, ul {
 }
 
 a {
+  outline: none;
   text-decoration: none;
 }
 

@@ -12,7 +12,7 @@
                 <a ka="header-home" href="/">首页</a>
               </li>
               <li class="">
-                <a ka="header-job" href="/good">精华</a>
+                <a ka="header-job" href="/?tab=good">精华</a>
               </li>
               <li class="">
                 <a ka="header_brand" href="/share">分享</a>
@@ -24,6 +24,20 @@
                 <a ka="header-article" href="/job">招聘</a>
               </li>
             </ul>
+          </div>
+          <div class="right-nav index-nav fr">
+            <div class="right-nav-inner">
+              <a
+                href="https://signup.zhipin.com"
+                class="header-index-register btn btn-outline"
+                >注册</a
+              >
+              <a
+                href="https://signup.zhipin.com"
+                class="header-index-login btn btn-outline"
+                >登录</a
+              >
+            </div>
           </div>
         </div>
       </header>
@@ -93,6 +107,25 @@ export default {
           text-align: center;
           font-size: 14px;
           margin: 0 7px;
+        }
+      }
+      .right-nav {
+        .btn-outline {
+          display: inline-block;
+          vertical-align: middle;
+          border-radius: 15px;
+          text-align: center;
+          font-size: 13px;
+          height: 23px;
+          line-height: 23px;
+          padding: 0 9px 0 11px;
+          min-width: 0;
+          margin-left: 17px;
+          color: #fff;
+          border: 1px #5dd5c8 solid;
+          box-sizing: content-box;
+          letter-spacing: 1px;
+          background: #202329;
         }
       }
     }
