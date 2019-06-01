@@ -1,5 +1,7 @@
-// eslint-disable
+/* eslint-disable */
+
 function handleError(error, app, store, redirect, route) {
+  console.log(error, app, store, redirect, route)
   if (error.response.status) {
     switch (error.response.status) {
       case 401:
@@ -13,7 +15,7 @@ function handleError(error, app, store, redirect, route) {
         }, 1000)
         break
       case 404:
-        app.$toast.error('网络请求不存在')
+        redirect(`/error`)
         break
       default:
         app.$toast.error(error.response.data.error_msg)

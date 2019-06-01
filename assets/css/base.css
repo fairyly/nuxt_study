@@ -609,4 +609,19 @@ a {
   margin: 0 auto;
 }
 
+.common-tab-box {
+  clear: both;
+  margin-top: 30px;
+}
+
+.common-tab-box h3 {
+  position: relative;
+  height: 45px;
+}
+
+.common-tab-box .common-tab-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
 
