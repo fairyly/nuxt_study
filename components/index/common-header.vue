@@ -1,3 +1,8 @@
+<!--
+import CommonHeader from '~/components/index/common-header.vue'
+components: { CommonHeader }
+<common-header :current-tab="currentTab"></common-header>
+ -->
 <template>
   <header class="index-header">
     <div class="inner-content index-inner">
@@ -6,20 +11,20 @@
       </div>
       <div class="index-nav fl">
         <ul>
-          <li class="cur">
-            <a ka="header-home" href="/">首页</a>
+          <li :class="[currentTab === 'all' ? 'current-li' : '']">
+            <a class="index-header-home" href="/">首页</a>
           </li>
-          <li class="">
-            <a ka="header-job" href="/?tab=good">精华</a>
+          <li :class="[currentTab === 'good' ? 'current-li' : '']">
+            <a class="index-header-good" href="/list?tab=good">精华</a>
           </li>
-          <li class="">
-            <a ka="header_brand" href="/share">分享</a>
+          <li :class="[currentTab === 'share' ? 'current-li' : '']">
+            <a class="index-header-share" href="/list?tab=share">分享</a>
           </li>
-          <li class="">
-            <a ka="header-app" href="/ask">问答</a>
+          <li :class="[currentTab === 'ask' ? 'current-li' : '']">
+            <a class="index-header-ask" href="/list?tab=ask">问答</a>
           </li>
-          <li class="">
-            <a ka="header-article" href="/job">招聘</a>
+          <li :class="[currentTab === 'job' ? 'current-li' : '']">
+            <a class="index-header-job" href="/list?tab=job">招聘</a>
           </li>
         </ul>
       </div>
@@ -40,7 +45,18 @@
     </div>
   </header>
 </template>
-
+<script>
+export default {
+  props: {
+    currentTab: {
+      type: String,
+      default() {
+        return 'all'
+      }
+    }
+  }
+}
+</script>
 <style lang="less" scoped>
 .index-header {
   position: relative;
@@ -83,6 +99,19 @@
         text-align: center;
         font-size: 14px;
         margin: 0 7px;
+        a {
+          color: #fff;
+        }
+        &.current-li {
+          a {
+            color: #1890ff;
+          }
+        }
+        &:hover {
+          a {
+            color: #1890ff;
+          }
+        }
       }
     }
     .right-nav {

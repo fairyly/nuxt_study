@@ -7,26 +7,8 @@
       </div>
       <div class="main-content">
         <div class="inner-content">
-          <common-tab-box
-            cate-title="全部"
-            :data-list="dataList"
-          ></common-tab-box>
-          <common-tab-box
-            cate-title="精华"
-            :data-list="goodList"
-          ></common-tab-box>
-          <common-tab-box
-            cate-title="分享"
-            :data-list="shareList"
-          ></common-tab-box>
-          <common-tab-box
-            cate-title="问答"
-            :data-list="askList"
-          ></common-tab-box>
-          <common-tab-box
-            cate-title="招聘"
-            :data-list="jobList"
-          ></common-tab-box>
+          <common-list :current-tab="currentTab" :data-list="dataList">
+          </common-list>
         </div>
       </div>
       <common-footer></common-footer>
@@ -35,7 +17,7 @@
 </template>
 <script>
 import CommonHeader from '~/components/index/common-header.vue'
-import CommonTabBox from '~/components/index/common-tab-box.vue'
+import CommonList from '~/components/list/common-list.vue'
 import CommonFooter from '~/components/index/common-footer.vue'
 import dateUtil from '~/assets/js/public.js'
 function handleData(data) {
@@ -46,22 +28,19 @@ function handleData(data) {
   return data
 }
 export default {
-  components: { CommonHeader, CommonTabBox, CommonFooter },
+  components: { CommonHeader, CommonList, CommonFooter },
+  data() {
+    return {
+      dataList: []
+    }
+  },
   async asyncData({ $axios, query }) {
     /* eslint-disable */
-    const data = await $axios.$get('topics?limit=6')
-    const good = await $axios.$get('topics?tab=good&limit=6')
-    const share = await $axios.$get('topics?tab=share&limit=6')
-    const ask = await $axios.$get('topics?tab=ask&limit=6')
-    const job = await $axios.$get('topics?tab=job&limit=6')
+    const data = await $axios.$get(`topics?tab=${query.tab}&limit=30&page=1`)
     if (data.success) {
       return {
-        currentTab: 'all',
-        dataList: handleData(data.data),
-        goodList: handleData(good.data),
-        shareList: handleData(share.data),
-        askList: handleData(ask.data),
-        jobList: handleData(job.data)
+        currentTab: query.tab,
+        dataList: handleData(data.data)
       }
     }
     return { dataList: [] }

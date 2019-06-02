@@ -1,13 +1,13 @@
 <!--
-import CommonTabBox from '~/components/index/common-tab-box.vue'
-components: { CommonTabBox }
-<common-tab-box :cate-title="cateTitle" :data-list="dataList"></common-tab-box>
+import CommonList from '~/components/list/common-list.vue'
+components: { CommonList }
+<common-list :cate-title="cateTitle" :data-list="dataList"></common-list>
  -->
 <template>
   <div class="common-tab-box">
-    <h3>{{ cateTitle }}</h3>
+    <h3>{{ tabList[currentTab] }}</h3>
     <ul class="flex flex-space-between flex-wrap">
-      <template v-for="(item, index) in dataList">
+      <template v-for="(item, index) in dataLists">
         <li :key="index">
           <div class="li-sub">
             <a :href="'/detail?id=' + item.id">
@@ -43,18 +43,26 @@ components: { CommonTabBox }
         </li>
       </template>
     </ul>
-    <p v-if="dataList.length" class="common-tab-more">
-      <a-button type="primary" ghost @click="toShowList">查看更多</a-button>
+    <p v-if="!loadAll" class="common-tab-more">
+      <a-button type="primary" ghost @click="loadNext">下一页</a-button>
     </p>
   </div>
 </template>
 <script>
+import dateUtil from '~/assets/js/public.js'
+function handleData(data) {
+  data.forEach(ele => {
+    ele.create_at = dateUtil.dateTrans(ele.create_at)
+    ele.last_reply_at = dateUtil.dateTrans(ele.last_reply_at)
+  })
+  return data
+}
 export default {
   props: {
-    cateTitle: {
+    currentTab: {
       type: String,
       default() {
-        return ''
+        return 'all'
       }
     },
     dataList: {
@@ -73,39 +81,29 @@ export default {
         'ask': '问答',
         'good': '精华',
         'job': '招聘'
-      }
-      /*dataList: [
-        {
-          author: {
-            loginname: 'alsotang',
-            avatar_url:
-              'https://avatars1.githubusercontent.com/u/1147375?v=4&s=120'
-          },
-          author_id: '504c28a2e2b845157708cb61',
-          content: '',
-          create_at: '2018-10-27T14:33:14.694Z',
-          good: false,
-          id: '5bd4772a14e994202cd5bdb7',
-          last_reply_at: '2019-05-31T09:57:29.213Z',
-          reply_count: 189,
-          tab: 'share',
-          title: '服务器迁移至 aws 日本机房',
-          top: true,
-          visit_count: 61293
-        }
-      ]*/
+      },
+      loadAll: false,
+      page: 1, // 当前页
+      limit: 30, // 每一页个数
+      dataLists: this.dataList
     }
   },
   methods: {
-    toShowList() {
-      const that = this
-      let tabName = ''
-      for(let key in that.tabList) {
-        if (that.tabList[key] == that.cateTitle) {
-          tabName = key
-        }
+    loadNext() {
+      const that = this;
+      that.page++;
+      this.getData();
+    },
+    async getData() {
+      const that = this;
+      const tab = that.$route.query.tab;
+      const nextData = await that.$axios.$get(`topics?tab=${tab}&page=${that.page}&limit=${that.limit}`)
+      if (!nextData.data.length) {
+        that.loadAll = true
+        that.$message.success('已经全部加载完成');
+        return false;
       }
-      that.$router.push(`/list?tab=${tabName}&limit=30&page=1`)
+      that.dataLists = handleData(that.dataLists.concat(nextData.data))
     }
   }
 }

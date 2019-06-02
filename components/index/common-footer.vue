@@ -1,3 +1,8 @@
+<!--
+import CommonFooter from '~/components/index/common-footer.vue'
+components: { CommonFooter }
+<common-footer></common-footer>
+ -->
 <template>
   <footer>
     <div class="footer-content">

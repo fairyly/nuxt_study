@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 function handleError(error, app, store, redirect, route) {
-  console.log(error, app, store, redirect, route)
   if (error.response.status) {
     switch (error.response.status) {
       case 401:

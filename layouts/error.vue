@@ -5,7 +5,9 @@
         <p class="font-60">404</p>
         <p class="font-20 color-d9d9d9">页面不存在</p>
       </h1>
-      <h1 v-else class="font-60">应用发生错误异常</h1>
+      <h1 v-else>
+        <p class="font-60">应用发生异常</p>
+      </h1>
       <nuxt-link to="/">首 页</nuxt-link>
     </div>
   </div>
