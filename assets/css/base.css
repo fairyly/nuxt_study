@@ -23,10 +23,6 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-text-size-adjust: none;
-  font-family: arial,verdana,helvetica,'PingFang SC','HanHei SC',STHeitiSC-Light,Microsoft Yahei,sans-serif;
-  -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -87,6 +83,13 @@ td,
 th {
   padding: 0;
   text-align: left;
+}
+
+blockquote {
+  display: block;
+  padding: 0 0 0 15px;
+  margin: 0 0 20px;
+  border-left: 5px solid #eee;
 }
 
 b,
@@ -254,15 +257,6 @@ button::-moz-focus-inner,
   -webkit-border-radius: 6px;
   border-radius: 6px;
   background-color: rgba(0, 0, 0, 0.1)
-}
-
-li, ol, ul {
-  list-style: none;
-}
-
-a {
-  outline: none;
-  text-decoration: none;
 }
 
 /* 省略号 ...*/
@@ -617,6 +611,7 @@ a {
 .common-tab-box h3 {
   position: relative;
   height: 45px;
+  text-align: left;
 }
 
 .common-tab-box .common-tab-more {
@@ -624,4 +619,60 @@ a {
   margin-top: 20px;
 }
 
+/* markdown */
+.markdown-text h2 {
+  font-size: 26px;
+  padding: 10px 0;
+  margin: 30px 0 15px;
+  border-bottom: 1px solid #eee;
+}
+.markdown-text h3 {
+  padding: 10px 0;
+  margin: 30px 0 15px;
+  border-bottom: 1px solid #eee;
+  font-weight: 700;
+  font-size: 15px;
+  color: #424a5e;
+}
+.markdown-text p {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  line-height: 2em;
+  margin: 1em 0;
+  font-size: 15px;
+  line-height: 1.7em;
+  overflow: auto;
+}
 
+.markdown-text ul {
+  padding: 0;
+  margin: 0 0 10px 25px;
+  list-style-type: disc;
+}
+
+.markdown-text li {
+  display: list-item;
+  line-height: 2em;
+  font-size: 14px;
+}
+
+.markdown-text .prettyprint {
+  font-size: 14px;
+  border-radius: 0;
+  padding: 0 15px;
+  border: none;
+  margin: 20px -10px;
+  border-width: 1px 0;
+  background: #f7f7f7;
+  -o-tab-size: 4;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  line-height: 22px;
+}
+
+.markdown-text .prettyprint code {
+  font-size: 12px;
+}

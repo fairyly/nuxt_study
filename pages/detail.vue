@@ -8,6 +8,29 @@
       <div class="main-content">
         <div class="inner-content">
           <div class="list-detail">
+            <div class="list-detail-r">
+              <div class="author-info">
+                <div>
+                  <img :src="authorObj.avatar_url" alt="" />
+                  <p>
+                    <span class="author-name">{{ authorObj.loginname }}</span
+                    ><a
+                      v-if="authorObj.githubUsername"
+                      :href="'https://github.com/' + authorObj.githubUsername"
+                      ><a-icon type="github"
+                    /></a>
+                  </p>
+                </div>
+                <p>
+                  <span class="author-score">积分：{{ authorObj.score }}</span>
+                </p>
+                <p>
+                  <span class="author-score"
+                    >注册时间：{{ authorObj.create_at }}</span
+                  >
+                </p>
+              </div>
+            </div>
             <div class="list-detail-l">
               <div class="list-detail-top">
                 <p class="topic-info">
@@ -15,6 +38,8 @@
                     >{{ dataList.good ? '精华' : tabList[dataList.tab] }}
                   </span>
                   {{ dataList.title }}
+                </p>
+                <p class="topic-info">
                   <img :src="dataList.author.avatar_url" alt="" />
                   <span class="author-name"
                     >作者：{{ dataList.author.loginname }}</span
@@ -32,7 +57,6 @@
                 <p v-htmlContent="dataList.content"></p>
               </div>
             </div>
-            <div class="list-detail-r"></div>
           </div>
         </div>
       </div>
@@ -75,9 +99,12 @@ export default {
     /* eslint-disable */
     const data = await $axios.$get(`topic/${query.id}?mdrender=true`)
     if (data.success) {
+      const author = await $axios.$get(`user/${data.data.author.loginname}`)
+      author.data.create_at = dateUtil.dateTrans(author.data.create_at)
       return {
         currentTab: 'all',
-        dataList: handleData(data.data)
+        dataList: handleData(data.data),
+        authorObj: author.data
       }
     }
     return { dataList: {} }
@@ -121,11 +148,40 @@ export default {
         min-height: 813px;
         text-align: left;
         .list-detail-top {
+          border-bottom: 1px solid #444c60;
+          margin-bottom: 10px;
+          padding-bottom: 10px;
           .topic-info {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 8px 0;
+            display: inline-block;
+            vertical-align: bottom;
             img {
               width: 30px;
               height: 30px;
               border-radius: 50%;
+            }
+            .li-sub-top_tab {
+              display: inline-block;
+              padding: 0 12px;
+              margin-right: 15px;
+              margin-bottom: 10px;
+              border: 1px solid #5ed5c8;
+              color: #5ed5c8;
+              height: 23px;
+              line-height: 23px;
+              border-radius: 13px;
+              margin-top: 0;
+              font-size: 12px;
+            }
+            .li-sub-top_userinfo {
+              font-size: 12px;
+              color: #838383;
+            }
+            .author-name {
+              font-size: 12px;
+              color: #424a5e;
             }
           }
         }
@@ -134,8 +190,44 @@ export default {
         float: right;
         width: 298px;
         padding-bottom: 40px;
+        .author-info {
+          padding: 20px;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          p {
+            margin-bottom: 15px;
+          }
+          img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+          }
+          .author-name {
+            margin-top: 8px;
+            font-size: 20px;
+            color: #424a5e;
+            font-weight: 400;
+          }
+        }
+        .author-score {
+          display: inline-block;
+          padding: 0 12px;
+          margin-right: 15px;
+          margin-bottom: 10px;
+          border: 1px solid #5ed5c8;
+          color: #5ed5c8;
+          height: 23px;
+          line-height: 23px;
+          border-radius: 13px;
+          margin-top: 0;
+          font-size: 12px;
+        }
       }
       &::after {
+        content: '';
+        display: block;
+        overflow: hidden;
+        visibility: hidden;
         clear: both;
       }
     }
