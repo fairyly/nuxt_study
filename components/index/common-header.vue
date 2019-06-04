@@ -30,16 +30,8 @@ components: { CommonHeader }
       </div>
       <div class="right-nav index-nav fr">
         <div class="right-nav-inner">
-          <a
-            href="https://signup.zhipin.com"
-            class="header-index-register btn btn-outline"
-            >注册</a
-          >
-          <a
-            href="https://signup.zhipin.com"
-            class="header-index-login btn btn-outline"
-            >登录</a
-          >
+          <a href="/" class="header-index-register btn btn-outline">注册</a>
+          <a href="/" class="header-index-login btn btn-outline">登录</a>
         </div>
       </div>
     </div>

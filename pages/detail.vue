@@ -30,6 +30,29 @@
                   >
                 </p>
               </div>
+              <div class="topic-replies">
+                <ul>
+                  <li
+                    v-for="(item, index) in dataList.replies"
+                    :key="index"
+                    class="cell-reply"
+                  >
+                    <div class="reply-info">
+                      <span class="cell-reply-index p-r-10"
+                        >{{ index + 1 }} 楼</span
+                      ><img
+                        :src="item.author.avatar_url"
+                        alt=""
+                        class="inline-block vertical-m"
+                      /><span class="p-lr-10">{{ item.author.loginname }}</span
+                      ><span class="p-l-10">{{ item.create_at }}</span>
+                    </div>
+                    <div class="detail-content">
+                      <p v-htmlContent="item.content"></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="list-detail-l">
               <div class="list-detail-top">
@@ -101,6 +124,11 @@ export default {
     if (data.success) {
       const author = await $axios.$get(`user/${data.data.author.loginname}`)
       author.data.create_at = dateUtil.dateTrans(author.data.create_at)
+      if (data.data.replies.length) {
+        data.data.replies.forEach(ele => {
+          ele.create_at = dateUtil.dateTrans(ele.create_at)
+        })
+      }
       return {
         currentTab: 'all',
         dataList: handleData(data.data),
@@ -221,6 +249,22 @@ export default {
           border-radius: 13px;
           margin-top: 0;
           font-size: 12px;
+        }
+        .topic-replies {
+          text-align: left;
+          border-top: 1px dashed #eee;
+          .cell-reply {
+            margin-top: 15px;
+             border-bottom: 1px dashed #eee;
+            .reply-info {
+              color: #8d92a1;
+              img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+              }
+            }
+          }
         }
       }
       &::after {
