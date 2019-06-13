@@ -20,3 +20,11 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+## demo
+
+![](https://github.com/fairyly/nuxt_study/blob/master/demo.jpg)
+
+![](https://github.com/fairyly/nuxt_study/blob/master/demo2.jpg)
+
+![](https://github.com/fairyly/nuxt_study/blob/master/demo3.jpg)
