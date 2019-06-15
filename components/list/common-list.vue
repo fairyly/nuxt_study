@@ -96,7 +96,7 @@ export default {
     },
     async getData() {
       const that = this;
-      const tab = that.$route.query.tab;
+      const tab = that.$route.query.tab || 'all';
       const nextData = await that.$axios.$get(`topics?tab=${tab}&page=${that.page}&limit=${that.limit}`)
       if (!nextData.data.length) {
         that.loadAll = true

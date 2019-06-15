@@ -120,7 +120,8 @@ export default {
   },
   async asyncData({ $axios, query }) {
     /* eslint-disable */
-    const data = await $axios.$get(`topic/${query.id}?mdrender=true`)
+    console.log(query)
+    const data = await $axios.$get(`topic/${query.id || '5bd4772a14e994202cd5bdb7'}?mdrender=true`)
     if (data.success) {
       const author = await $axios.$get(`user/${data.data.author.loginname}`)
       author.data.create_at = dateUtil.dateTrans(author.data.create_at)

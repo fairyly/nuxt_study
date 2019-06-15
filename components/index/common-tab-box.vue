@@ -99,7 +99,7 @@ export default {
   methods: {
     toShowList() {
       const that = this
-      let tabName = ''
+      let tabName = 'all';
       for(let key in that.tabList) {
         if (that.tabList[key] == that.cateTitle) {
           tabName = key
